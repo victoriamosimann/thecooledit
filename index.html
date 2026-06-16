@@ -1,311 +1,530 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURA Daily — Seu beauty map editorial</title>
-  <meta name="description" content="Análise de imagem pessoal, beleza e lifestyle. Curado com intenção, direto na sua caixa de entrada." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Cool Edit — moda, beleza, tendências e comportamento para cool girls.">
+  <title>The Cool Edit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:   #FFFFFF;
+      --black:   #0A0A0A;
+      --burg:    #390303;
+      --burg-hi: #5c0808;
+      --gray1:   #F2F2F2;
+      --gray2:   #E0E0E0;
+      --gray3:   #9A9A9A;
+      --gray4:   #5A5A5A;
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+      --max:     1360px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TICKER ─────────────────────────────── */
+    .ticker {
+      background: var(--black); color: var(--white);
+      padding: 0.4rem 0; overflow: hidden;
+      font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
+    }
+    .ticker-track { display: flex; width: max-content; animation: tick 28s linear infinite; }
+    .ticker-track span { white-space: nowrap; padding-right: 4rem; }
+    .ticker-track .sep { color: var(--burg); }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── HEADER ─────────────────────────────── */
+    .site-header { background: var(--white); border-bottom: 1px solid var(--black); position: sticky; top: 0; z-index: 300; }
+    .header-main {
+      max-width: var(--max); margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; height: 68px;
+    }
+    .nav-l { display: flex; gap: 2rem; }
+    .nav-r { display: flex; gap: 2rem; align-items: center; justify-content: flex-end; }
+    .nav-l a, .nav-r a {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gray4); transition: color 0.2s;
+    }
+    .nav-l a:hover, .nav-r a:hover { color: var(--burg); }
+    .logo {
+      font-family: var(--serif); font-weight: 900; font-size: 1.9rem;
+      letter-spacing: -0.02em; color: var(--black); text-align: center; line-height: 1;
+    }
+    .logo em { font-style: italic; color: var(--burg); }
+    .cta-pill {
+      background: var(--burg); color: var(--white) !important;
+      padding: 0.45rem 1.2rem; font-size: 0.56rem !important;
+      letter-spacing: 0.14em !important; transition: background 0.2s;
+    }
+    .cta-pill:hover { background: var(--burg-hi) !important; }
+
+    /* cat bar */
+    .cat-bar { border-top: 1px solid var(--gray2); }
+    .cat-bar-inner {
+      max-width: var(--max); margin: 0 auto; padding: 0 2rem;
+      display: flex; overflow-x: auto; scrollbar-width: none;
+    }
+    .cat-bar-inner::-webkit-scrollbar { display: none; }
+    .clink {
+      font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gray3);
+      padding: 0.7rem 1.2rem 0.7rem 0; margin-right: 1.2rem;
+      border-bottom: 2px solid transparent; white-space: nowrap;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .clink:hover, .clink.on { color: var(--black); border-bottom-color: var(--black); }
+
+    /* ── HERO ───────────────────────────────── */
+    .hero {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 1.15fr 1fr;
+      border-bottom: 1px solid var(--black);
+    }
+    .hero-img { overflow: hidden; background: #111; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; transition: transform 1s ease; }
+    .hero:hover .hero-img img { transform: scale(1.03); }
+    .hero-body {
+      border-left: 1px solid var(--black);
+      padding: 3.5rem 3rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .hero-eyebrow {
+      font-size: 0.54rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--burg);
+      margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--gray2); max-width: 48px; }
+    .hero-title {
+      font-family: var(--serif); font-weight: 900;
+      font-size: clamp(2.6rem, 4.5vw, 4.8rem);
+      line-height: 0.95; letter-spacing: -0.025em; color: var(--black);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--burg); display: block; }
+    .hero-excerpt {
+      font-size: 0.95rem; line-height: 1.8; color: var(--gray4);
+      border-left: 2px solid var(--burg); padding-left: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--black);
+      border-bottom: 1px solid var(--black); padding-bottom: 2px;
+      transition: gap 0.3s, color 0.2s, border-color 0.2s; width: fit-content;
+    }
+    .hero-cta:hover { gap: 1rem; color: var(--burg); border-bottom-color: var(--burg); }
+    .hero-foot {
+      padding-top: 2rem; border-top: 1px solid var(--gray2);
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .hero-meta { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray3); }
+    .hero-num { font-family: var(--serif); font-size: 5rem; font-weight: 900; color: var(--gray2); line-height: 1; letter-spacing: -0.05em; }
+
+    /* ── SECTION HEAD ───────────────────────── */
+    .sec-head {
+      max-width: var(--max); margin: 2.5rem auto 0; padding: 0 2rem 1.2rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      border-bottom: 1px solid var(--black);
+    }
+    .sec-head-label { font-size: 0.54rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--black); white-space: nowrap; }
+    .sec-head-line { flex: 1; height: 0.5px; background: var(--gray2); }
+    .sec-head-count { font-family: var(--serif); font-style: italic; font-size: 0.8rem; color: var(--gray3); }
+
+    /* ── GRID ───────────────────────────────── */
+    .grid-wrap {
+      max-width: var(--max); margin: 0 auto; padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 240px;
+      border-bottom: 1px solid var(--black);
+    }
+
+    /* card base */
+    .card {
+      padding: 1.6rem; border-right: 1px solid var(--gray2);
+      border-bottom: 1px solid var(--gray2);
+      display: flex; flex-direction: column; gap: 0.85rem;
+    }
+    .card:last-child { border-right: none; }
+    .ci { overflow: hidden; background: var(--gray1); }
+    .ci img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .card:hover .ci img { transform: scale(1.04); }
+    .ci-43 { aspect-ratio: 4/3; }
+    .ci-32 { aspect-ratio: 3/2; }
+    .cat-tag {
+      font-size: 0.5rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--burg);
+    }
+    .ctitle {
+      font-family: var(--serif); font-weight: 700;
+      line-height: 1.2; color: var(--black); transition: color 0.2s;
+    }
+    .card:hover .ctitle { color: var(--burg); }
+    .ctitle-lg { font-size: 1.45rem; }
+    .ctitle-md { font-size: 1.15rem; }
+    .ctitle-sm { font-size: 0.95rem; }
+    .cexc { font-size: 0.8rem; color: var(--gray4); line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .cmeta { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray3); margin-top: auto; padding-top: 0.8rem; border-top: 0.5px solid var(--gray2); }
+
+    /* wide card */
+    .card-wide { grid-column: span 2; flex-direction: row; gap: 0; padding: 0; }
+    .card-wide .ci { flex: 1.2; }
+    .card-wide .ci img { height: 100%; aspect-ratio: unset; }
+    .card-wide-body { flex: 1; padding: 1.8rem; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--gray2); }
+    .card-wide .ctitle-lg { font-size: 1.7rem; }
+
+    /* sidebar */
+    .sidebar { border-left: 1px solid var(--gray2); grid-row: span 2; display: flex; flex-direction: column; }
+    .sb-block { padding: 1.4rem; border-bottom: 1px solid var(--gray2); }
+    .sb-title { font-size: 0.5rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); padding-bottom: 0.8rem; border-bottom: 0.5px solid var(--gray2); margin-bottom: 1.1rem; }
+    .mini-list { display: flex; flex-direction: column; gap: 1rem; }
+    .mini { display: grid; grid-template-columns: 60px 1fr; gap: 0.7rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--gray2); }
+    .mini:last-child { border-bottom: none; padding-bottom: 0; }
+    .mini-img { aspect-ratio: 1; overflow: hidden; background: var(--gray1); }
+    .mini-img img { width: 100%; height: 100%; object-fit: cover; }
+    .mini-cat { font-size: 0.46rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--burg); margin-bottom: 0.2rem; }
+    .mini-title { font-family: var(--serif); font-size: 0.85rem; line-height: 1.3; color: var(--black); transition: color 0.2s; }
+    .mini:hover .mini-title { color: var(--burg); }
+
+    /* pullquote */
+    .sb-quote { background: var(--black); padding: 1.4rem; flex: 1; }
+    .pq { font-family: var(--serif); font-size: 1rem; font-style: italic; line-height: 1.55; color: var(--white); margin-bottom: 0.8rem; }
+    .pq-src { font-size: 0.5rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--burg); }
+
+    /* tsb */
+    .sb-tsb { background: var(--burg); padding: 1.4rem; }
+    .tsb-eye { font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+    .tsb-h { font-family: var(--serif); font-size: 1.1rem; font-style: italic; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+    .tsb-btn { display: block; background: var(--white); color: var(--burg); text-align: center; padding: 0.55rem; font-size: 0.52rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; transition: background 0.2s; }
+    .tsb-btn:hover { background: var(--black); color: var(--white); }
+
+    /* ── MARQUEE ────────────────────────────── */
+    .marquee { border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); padding: 0.55rem 0; overflow: hidden; margin: 2.5rem 0; }
+    .marquee-track { display: flex; width: max-content; animation: tick 22s linear infinite; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--black); }
+    .marquee-track span { white-space: nowrap; padding-right: 3rem; }
+    .marquee-track .dot { color: var(--burg); font-style: normal; }
+
+    /* ── ROW 2 ──────────────────────────────── */
+    .row2 { max-width: var(--max); margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); }
+    .row2 .card { border-bottom: none; }
+    .row2 .card:nth-child(3) { border-right: none; }
+
+    /* ── NEWSLETTER ─────────────────────────── */
+    .newsletter { background: var(--black); padding: 6rem 2rem; }
+    .nl { max-width: 520px; margin: 0 auto; text-align: center; }
+    .nl-badge { display: inline-block; border: 1px solid var(--burg); color: var(--burg); font-size: 0.5rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.3rem 0.9rem; margin-bottom: 1.5rem; }
+    .nl-h { font-family: var(--serif); font-weight: 900; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 1rem; }
+    .nl-h em { font-style: italic; color: var(--burg); display: block; }
+    .nl-sub { font-size: 0.86rem; color: var(--gray3); line-height: 1.75; margin-bottom: 2.5rem; }
+    .nl-form { display: flex; border: 1px solid rgba(255,255,255,0.15); max-width: 400px; margin: 0 auto; }
+    .nl-form input { flex: 1; background: transparent; border: none; padding: 0.9rem 1rem; font-family: var(--sans); font-size: 0.82rem; color: var(--white); outline: none; }
+    .nl-form input::placeholder { color: rgba(255,255,255,0.25); }
+    .nl-form button { background: var(--burg); color: var(--white); border: none; padding: 0.9rem 1.3rem; font-family: var(--sans); font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .nl-form button:hover { background: var(--burg-hi); }
+    .nl-note { font-size: 0.56rem; color: rgba(255,255,255,0.2); margin-top: 1rem; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.08); padding: 3rem 2rem 2rem; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { font-family: var(--serif); font-weight: 900; font-size: 1.5rem; color: var(--white); margin-bottom: 0.8rem; }
+    .footer-logo em { font-style: italic; color: var(--burg); }
+    .footer-about { font-size: 0.78rem; color: var(--gray3); line-height: 1.7; }
+    .fcol-title { font-size: 0.5rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+    .flinks { display: flex; flex-direction: column; gap: 0.6rem; }
+    .flinks a { font-size: 0.78rem; color: var(--gray3); transition: color 0.2s; }
+    .flinks a:hover { color: var(--burg); }
+    .footer-bottom { padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 0.56rem; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-img img { aspect-ratio: 16/9; }
+      .hero-body { border-left: none; border-top: 1px solid var(--black); padding: 2.5rem 2rem; }
+      .grid-wrap { grid-template-columns: 1fr 1fr; }
+      .sidebar { grid-row: span 1; border-left: none; border-top: 1px solid var(--gray2); grid-column: span 2; flex-direction: row; flex-wrap: wrap; }
+      .sb-block { flex: 1 1 200px; }
+      .card-wide { grid-column: span 2; flex-direction: column; }
+      .card-wide .ci img { aspect-ratio: 16/9; height: auto; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .header-main { grid-template-columns: 1fr auto; }
+      .nav-l { display: none; }
+      .nav-r .cta-pill { display: inline-block; }
+      .nav-r a:not(.cta-pill) { display: none; }
+      .grid-wrap { grid-template-columns: 1fr; }
+      .card-wide { flex-direction: column; }
+      .row2 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .nl-form { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="l-A">A</span><span class="l-ura">ura</span>
-        <span class="l-daily">Daily</span>
-      </a>
-      <nav class="nav">
-        <a href="#artigos">Artigos</a>
-        <a href="#newsletter" class="btn-nav">Assinar grátis</a>
-      </nav>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Moda <span class="sep">✦</span> Beleza <span class="sep">✦</span> Tendências <span class="sep">✦</span> Comportamento <span class="sep">✦</span> Coloração Pessoal <span class="sep">✦</span> Cool Girls Only <span class="sep">✦</span> The Cool Edit <span class="sep">✦</span>&nbsp;</span>
+    <span>Moda <span class="sep">✦</span> Beleza <span class="sep">✦</span> Tendências <span class="sep">✦</span> Comportamento <span class="sep">✦</span> Coloração Pessoal <span class="sep">✦</span> Cool Girls Only <span class="sep">✦</span> The Cool Edit <span class="sep">✦</span>&nbsp;</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-main">
+    <nav class="nav-l">
+      <a href="#" onclick="filter('moda',this);return false">Moda</a>
+      <a href="#" onclick="filter('beleza',this);return false">Beleza</a>
+      <a href="#" onclick="filter('tendencias',this);return false">Tendências</a>
+    </nav>
+    <a href="index.html" class="logo">The Cool <em>Edit</em></a>
+    <nav class="nav-r">
+      <a href="#" onclick="filter('coloracao',this);return false">Coloração</a>
+      <a href="#" onclick="filter('comportamento',this);return false">Comportamento</a>
+      <a href="#newsletter" class="cta-pill">A-List</a>
+    </nav>
+  </div>
+  <div class="cat-bar">
+    <div class="cat-bar-inner">
+      <span class="clink on" onclick="filter('todos',this)">Tudo</span>
+      <span class="clink" onclick="filter('moda',this)">Moda</span>
+      <span class="clink" onclick="filter('beleza',this)">Beleza</span>
+      <span class="clink" onclick="filter('tendencias',this)">Tendências</span>
+      <span class="clink" onclick="filter('coloracao',this)">Coloração</span>
+      <span class="clink" onclick="filter('comportamento',this)">Comportamento</span>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-inner">
-
-      <!-- Texto -->
-      <div class="hero-text">
-        <span class="hero-eyebrow">Seu beauty map editorial</span>
-        <h1>
-          Tudo que importa<br />
-          para a mulher que<br />
-          <em>você está se tornando</em>
-        </h1>
-        <p class="hero-sub">Beleza, imagem pessoal, lifestyle.<br />Curado com intenção. Direto na sua caixa de entrada.</p>
-        <form class="hero-form" action="https://d0a0bedc.sibforms.com/serve/MUIFAF_DWSEhbf0St_SVDWEwCGDcXnx3YhtrtPhkWdGDgUV7V4n2FOcG9LYEAgZFvp-zJYttYZad54ok-kN50-6tmbdeFGhVrVxa4EaRsqz5VUlsi4mYypwqrsKU5dl7JbjKR1Hn5vcPn1y5MwiEc-BXczeG7agASCJaHKTwvXKlG05AjFlodD0rohKsnuxZWScJN0EOkVKrWueMJA==" method="POST">
-          <input type="email" name="EMAIL" placeholder="seu@email.com" required />
-          <button type="submit">Assinar</button>
-        </form>
-        <span class="hero-note">Gratuito · Sem spam · Cancele quando quiser</span>
-      </div>
-
-      <!-- Cards visuais (decorativo) -->
-      <div class="hero-visual">
-        <div class="hero-card-featured">
-          <div class="hero-card-img placeholder-img">
-            <span class="img-label">Bem-estar</span>
-          </div>
-          <div class="hero-card-body">
-            <span class="hero-card-cat">Em destaque</span>
-            <h3 class="hero-card-title">A rotina matinal que está mudando a vida das mulheres mais realizadas</h3>
-          </div>
-        </div>
-        <div class="hero-cards-row">
-          <div class="hero-card-sm">
-            <span class="hero-card-cat">Beleza</span>
-            <h4 class="hero-card-title">Skincare minimalista: o que realmente funciona</h4>
-          </div>
-          <div class="hero-card-sm">
-            <span class="hero-card-cat">Mentalidade</span>
-            <h4 class="hero-card-title">Pare de esperar estar pronta para começar</h4>
-          </div>
-        </div>
-      </div>
-
+<!-- HERO -->
+<section class="hero">
+  <a href="articles/coloracao-inverno.html" class="hero-img">
+    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&q=85" alt="Hero" loading="eager">
+  </a>
+  <div class="hero-body">
+    <div>
+      <div class="hero-eyebrow" id="hero-date">Edição de hoje</div>
+      <h1 class="hero-title">Sua paleta<br>não mente.<br><em>Você não<br>sabe ouvi-la.</em></h1>
+      <p class="hero-excerpt">Coloração pessoal não é diagnóstico de autoestima. É uma ferramenta de leitura — e quando você aprende a usar, para de comprar errado para sempre.</p>
+      <a href="articles/coloracao-inverno.html" class="hero-cta">Ler agora →</a>
     </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- CATEGORIAS -->
-  <section class="categorias">
-    <div class="container">
-      <div class="tags-row">
-        <a href="#" class="tag active" data-cat="todos">Todos</a>
-        <a href="#" class="tag" data-cat="beleza">Beleza</a>
-        <a href="#" class="tag" data-cat="bem-estar">Bem-estar</a>
-        <a href="#" class="tag" data-cat="relacionamentos">Relacionamentos</a>
-        <a href="#" class="tag" data-cat="estilo">Estilo</a>
-        <a href="#" class="tag" data-cat="mentalidade">Mentalidade</a>
-      </div>
+    <div class="hero-foot">
+      <div class="hero-meta">Coloração pessoal · 6 min</div>
+      <div class="hero-num">01</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider" />
+<!-- SECTION HEAD -->
+<div class="sec-head">
+  <span class="sec-head-label">Últimas edições</span>
+  <div class="sec-head-line"></div>
+  <span class="sec-head-count">06 histórias</span>
+</div>
 
-  <!-- ARTIGOS -->
-  <section class="artigos" id="artigos">
-    <div class="container">
+<!-- MAIN GRID -->
+<div class="grid-wrap" id="grid-artigos">
 
-      <!-- Header seção -->
-      <div class="section-header">
-        <span class="section-title">Edição de hoje</span>
-        <a href="#" class="section-link">Ver arquivo</a>
+  <!-- wide -->
+  <article class="card card-wide" data-cat="beleza">
+    <a href="#" class="ci"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=900&q=80" alt="" loading="lazy"></a>
+    <div class="card-wide-body">
+      <div>
+        <div class="cat-tag">Beleza</div>
+        <h2 class="ctitle ctitle-lg"><a href="#">Shade matching: como encontrar a base certa sem testar no pulso</a></h2>
+        <p class="cexc">A base certa não some na pele. Aprenda a ler o subtom antes de qualquer compra e pare de errar de uma vez.</p>
       </div>
+      <div class="cmeta">Beleza · 4 min de leitura</div>
+    </div>
+  </article>
 
-      <!-- DESTAQUE -->
-      <div class="destaque-grid">
-        <article class="card--destaque" data-cat="bem-estar">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Bem-estar</span>
-            <h2 class="card-titulo"><a href="artigos/exemplo.html">A rotina matinal que está mudando a vida das mulheres mais realizadas</a></h2>
-            <p class="card-resumo">Cinco hábitos simples praticados antes das 8h que criam o estado mental certo para o dia inteiro.</p>
-            <div class="card-meta">
-              <span>14 jun 2026</span>
-              <span>·</span>
-              <span>4 min de leitura</span>
-            </div>
-          </div>
-        </article>
+  <article class="card" data-cat="moda">
+    <a href="#" class="ci ci-43"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Moda</div>
+    <h2 class="ctitle ctitle-md"><a href="#">O que quiet luxury realmente significa — e por que a maioria erra</a></h2>
+    <p class="cexc">Menos logos, mais intenção. Uma forma de se vestir que comunica sem precisar explicar.</p>
+    <div class="cmeta">Moda · 5 min</div>
+  </article>
 
-        <div class="destaque-lateral">
-          <article class="card--lateral" data-cat="beleza">
-            <span class="card-cat">Beleza</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Skincare minimalista: o que realmente funciona</a></h3>
-            <div class="card-meta"><span>13 jun</span><span>·</span><span>3 min</span></div>
-          </article>
-
-          <article class="card--lateral" data-cat="relacionamentos">
-            <span class="card-cat">Relacionamentos</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Como se comunicar sem perder a essência</a></h3>
-            <div class="card-meta"><span>12 jun</span><span>·</span><span>5 min</span></div>
-          </article>
-
-          <article class="card--lateral" data-cat="mentalidade">
-            <span class="card-cat">Mentalidade</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Pare de esperar estar pronta para começar</a></h3>
-            <div class="card-meta"><span>11 jun</span><span>·</span><span>4 min</span></div>
-          </article>
-
-          <article class="card--lateral" data-cat="estilo">
-            <span class="card-cat">Estilo</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Como construir uma identidade visual pessoal</a></h3>
-            <div class="card-meta"><span>10 jun</span><span>·</span><span>5 min</span></div>
-          </article>
-        </div>
-      </div>
-
-      <!-- GRID -->
-      <div class="section-header" style="margin-top: 60px;">
-        <span class="section-title">Mais artigos</span>
-      </div>
-
-      <div class="grid" id="grid-artigos">
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/subtom-de-pele-o-teste-que-voce-pode-fazer-agora-mesmo.html">Subtom de pele: o teste que você pode fazer agora mesmo</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>3 min</span></div>
+  <!-- sidebar -->
+  <aside class="sidebar">
+    <div class="sb-block">
+      <div class="sb-title">Para ler agora</div>
+      <div class="mini-list">
+        <article class="mini">
+          <div class="mini-img"><img src="https://images.unsplash.com/photo-1583241475880-083f84372725?w=150&q=70" alt="" loading="lazy"></div>
+          <div>
+            <div class="mini-cat">Maquiagem</div>
+            <h3 class="mini-title"><a href="#">Olho defumado em peles quentes: qual sombra funciona</a></h3>
           </div>
         </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/o-que-a-sua-paleta-de-cores-entrega-antes-de-voce-falar.html">O que a sua paleta de cores entrega antes de você falar</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>3 min</span></div>
+        <article class="mini">
+          <div class="mini-img"><img src="https://images.unsplash.com/photo-1522337232-2541e8dbcea0?w=150&q=70" alt="" loading="lazy"></div>
+          <div>
+            <div class="mini-cat">Coloração</div>
+            <h3 class="mini-title"><a href="#">O batom vermelho certo para cada subtom</a></h3>
           </div>
         </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/o-subtom-da-sua-pele-dita-o-perfume-que-voce-deveria-usar.html">O subtom da sua pele dita o perfume que você deveria usar</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>3 min</span></div>
+        <article class="mini">
+          <div class="mini-img"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=150&q=70" alt="" loading="lazy"></div>
+          <div>
+            <div class="mini-cat">Cabelo</div>
+            <h3 class="mini-title"><a href="#">Loiro frio vs quente: o que ninguém conta antes de clarear</a></h3>
           </div>
         </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/o-batom-que-voce-escolhe-diz-o-que-a-roupa-nao-consegue.html">O batom que você escolhe diz o que a roupa não consegue</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>3 min</span></div>
-          </div>
-        </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/cabelo-no-inverno-o-que-muda-na-fibra-e-o-que-fazer-com-isso.html">Cabelo no inverno: o que muda na fibra e o que fazer com isso</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>4 min</span></div>
-          </div>
-        </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/os-habitos-de-beleza-que-definem-a-pele-depois-dos-30.html">Os hábitos de beleza que definem a pele depois dos 30</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>3 min</span></div>
-          </div>
-        </article>
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">beleza</span>
-            <h3 class="card-titulo"><a href="artigos/maquiagem-que-dura-o-dia-inteiro-o-que-realmente-funciona.html">Maquiagem que dura o dia inteiro: o que realmente funciona</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>4 min</span></div>
-          </div>
-        </article>
-        <article class="card--grid" data-cat="estilo">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">estilo</span>
-            <h3 class="card-titulo"><a href="artigos/o-guarda-roupa-capsula-que-funciona-de-verdade-no-dia-a-dia.html">O guarda-roupa cápsula que funciona de verdade no dia a dia</a></h3>
-            <div class="card-meta"><span>15 de junho de 2026</span><span>·</span><span>4 min</span></div>
-          </div>
-        </article>
-        <article class="card--grid" data-cat="estilo">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Estilo</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Cápsula de guarda-roupa: 15 peças, infinitas combinações</a></h3>
-            <div class="card-meta"><span>10 jun</span><span>·</span><span>6 min</span></div>
-          </div>
-        </article>
-
-        <article class="card--grid" data-cat="bem-estar">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Bem-estar</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">O que o seu sono diz sobre você</a></h3>
-            <div class="card-meta"><span>9 jun</span><span>·</span><span>4 min</span></div>
-          </div>
-        </article>
-
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Beleza</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Perfumes que criam memória afetiva</a></h3>
-            <div class="card-meta"><span>8 jun</span><span>·</span><span>3 min</span></div>
-          </div>
-        </article>
-
-        <article class="card--grid" data-cat="mentalidade">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Mentalidade</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Limites que libertam: o guia prático</a></h3>
-            <div class="card-meta"><span>7 jun</span><span>·</span><span>5 min</span></div>
-          </div>
-        </article>
-
-        <article class="card--grid" data-cat="relacionamentos">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Relacionamentos</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">Amizades que nutrem vs. amizades que drenam</a></h3>
-            <div class="card-meta"><span>6 jun</span><span>·</span><span>4 min</span></div>
-          </div>
-        </article>
-
-        <article class="card--grid" data-cat="beleza">
-          <div class="card-img placeholder-img"></div>
-          <div class="card-body">
-            <span class="card-cat">Beleza</span>
-            <h3 class="card-titulo"><a href="artigos/exemplo.html">A maquiagem que dura o dia inteiro</a></h3>
-            <div class="card-meta"><span>5 jun</span><span>·</span><span>5 min</span></div>
-          </div>
-        </article>
-      </div>
-
-      <div class="load-more">
-        <button class="btn-outline">Ver mais artigos</button>
       </div>
     </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="newsletter" id="newsletter">
-    <div class="container newsletter-inner">
-      <span class="hero-eyebrow">Newsletter gratuita</span>
-      <h2>Um artigo novo,<br /><em>toda manhã</em></h2>
-      <p>Junte-se às mulheres que começam o dia com o AURA Daily.<br />Conteúdo editorial. Sem ruído.</p>
-      <form class="newsletter-form" action="https://d0a0bedc.sibforms.com/serve/MUIFAF_DWSEhbf0St_SVDWEwCGDcXnx3YhtrtPhkWdGDgUV7V4n2FOcG9LYEAgZFvp-zJYttYZad54ok-kN50-6tmbdeFGhVrVxa4EaRsqz5VUlsi4mYypwqrsKU5dl7JbjKR1Hn5vcPn1y5MwiEc-BXczeG7agASCJaHKTwvXKlG05AjFlodD0rohKsnuxZWScJN0EOkVKrWueMJA==" method="POST">
-        <input type="email" name="EMAIL" placeholder="seu@email.com" required />
-        <button type="submit">Assinar agora</button>
-      </form>
-      <span class="newsletter-note">Gratuito · Cancele quando quiser</span>
+    <div class="sb-quote">
+      <p class="pq">"Estilo não é o que você usa. É o que você sabe sobre si mesma."</p>
+      <div class="pq-src">— The Cool Edit</div>
     </div>
-  </section>
+    <div class="sb-tsb">
+      <div class="tsb-eye">The Signature Bride</div>
+      <h3 class="tsb-h">O casamento inconfundivelmente seu.</h3>
+      <a href="https://pay.kiwify.com.br" class="tsb-btn">Conhecer o guia</a>
+    </div>
+  </aside>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div></div>
-        <a href="index.html" class="logo">
-          <span class="l-A">A</span><span class="l-ura">ura</span>
-          <span class="l-daily">Daily</span>
-        </a>
-        <div class="footer-links">
-          <a href="#">Instagram</a>
-          <a href="#">Privacidade</a>
-          <a href="#">Contato</a>
-        </div>
+  <article class="card" data-cat="cabelo">
+    <a href="#" class="ci ci-43"><img src="https://images.unsplash.com/photo-1522337094846-8a818192de1f?w=600&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Cabelo</div>
+    <h2 class="ctitle ctitle-md"><a href="#">Corte de cabelo por formato de rosto: o guia que ninguém te deu direito</a></h2>
+    <p class="cexc">Não é sobre tendência. É sobre o que equilibra o seu rosto específico.</p>
+    <div class="cmeta">Cabelo · 6 min</div>
+  </article>
+
+  <article class="card" data-cat="coloracao">
+    <a href="articles/coloracao-inverno.html" class="ci ci-43"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Coloração</div>
+    <h2 class="ctitle ctitle-md"><a href="articles/coloracao-inverno.html">O erro que a maioria comete ao descobrir sua paleta de cor</a></h2>
+    <p class="cexc">Descobrir a estação é só o começo. O que muda tudo são os detalhes que ninguém te conta.</p>
+    <div class="cmeta">Coloração · 5 min</div>
+  </article>
+
+  <article class="card" data-cat="comportamento">
+    <a href="#" class="ci ci-43"><img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Comportamento</div>
+    <h2 class="ctitle ctitle-md"><a href="#">Como montar um armário cápsula que não pareça uniforme</a></h2>
+    <p class="cexc">Minimalismo não é ausência de personalidade. Tem um jeito melhor — e mais interessante.</p>
+    <div class="cmeta">Lifestyle · 7 min</div>
+  </article>
+
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Moda <span class="dot">✦</span> Beleza <span class="dot">✦</span> Tendências <span class="dot">✦</span> Coloração Pessoal <span class="dot">✦</span> The Cool Edit <span class="dot">✦</span> Curadoria com atitude <span class="dot">✦</span> Para cool girls <span class="dot">✦</span>&nbsp;</span>
+    <span>Moda <span class="dot">✦</span> Beleza <span class="dot">✦</span> Tendências <span class="dot">✦</span> Coloração Pessoal <span class="dot">✦</span> The Cool Edit <span class="dot">✦</span> Curadoria com atitude <span class="dot">✦</span> Para cool girls <span class="dot">✦</span>&nbsp;</span>
+  </div>
+</div>
+
+<!-- ROW 2 -->
+<div class="sec-head">
+  <span class="sec-head-label">Tendências</span>
+  <div class="sec-head-line"></div>
+</div>
+<div class="row2">
+  <article class="card" data-cat="tendencias">
+    <a href="#" class="ci ci-32"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Tendências</div>
+    <h2 class="ctitle ctitle-lg"><a href="#">A volta dos batons escuros — e por que agora faz mais sentido do que nunca</a></h2>
+    <p class="cexc">Não é só passarela. É uma conversa sobre o que significa aparecer com intenção.</p>
+    <div class="cmeta">Tendências · 4 min</div>
+  </article>
+  <article class="card" data-cat="beleza">
+    <a href="#" class="ci ci-32"><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Beleza</div>
+    <h2 class="ctitle ctitle-lg"><a href="#">A rotina de skincare de três passos que realmente funciona</a></h2>
+    <p class="cexc">Dez produtos não significam pele boa. A diferença está na ordem e na consistência.</p>
+    <div class="cmeta">Beleza · 3 min</div>
+  </article>
+  <article class="card" data-cat="moda">
+    <a href="#" class="ci ci-32"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=75" alt="" loading="lazy"></a>
+    <div class="cat-tag">Moda</div>
+    <h2 class="ctitle ctitle-lg"><a href="#">As peças que cool girls estão comprando — e nenhuma delas é tendência</a></h2>
+    <p class="cexc">Existe uma diferença entre seguir e curar. A segunda é muito mais interessante.</p>
+    <div class="cmeta">Moda · 5 min</div>
+  </article>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="nl">
+    <div class="nl-badge">The A-List</div>
+    <h2 class="nl-h">Para quem define<br><em>tendência.</em></h2>
+    <p class="nl-sub">A newsletter semanal do The Cool Edit. Moda, beleza e comportamento com curadoria — direto para quem sabe o que quer.</p>
+    <form class="nl-form" action="https://d0a0bedc.sibforms.com/serve/MUIFAF_DWSEhbf0St_SVDWEwCGDcXnx3YhtrtPhkWdGDgUV7V4n2FOcG9LYEAgZFvp-zJYttYZad54ok-kN50-6tmbdeFGhVrVxa4EaRsqz5VUlsi4mYypwqrsKU5dl7JbjKR1Hn5vcPn1y5MwiEc-BXczeG7agASCJaHKTwvXKlG05AjFlodD0rohKsnuxZWScJN0EOkVKrWueMJA==" method="POST">
+      <input type="email" name="EMAIL" placeholder="seu@email.com" required aria-label="Email">
+      <button type="submit">Entrar na lista</button>
+    </form>
+    <p class="nl-note">Sem spam. Só o que vale a pena.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">The Cool <em>Edit</em></div>
+        <p class="footer-about">Moda, beleza, tendências e comportamento para quem define o próprio estilo. Curado por <a href="https://www.instagram.com/vicyohanamosimann" style="color:var(--burg)">@vicyohanamosimann</a>.</p>
       </div>
-      <p class="footer-copy">por Vic Yohana Mosimann &nbsp;·&nbsp; &copy; 2026 AURA Daily</p>
+      <div>
+        <div class="fcol-title">Editorias</div>
+        <nav class="flinks">
+          <a href="#">Moda</a><a href="#">Beleza</a>
+          <a href="#">Tendências</a><a href="#">Coloração</a><a href="#">Comportamento</a>
+        </nav>
+      </div>
+      <div>
+        <div class="fcol-title">Redes</div>
+        <nav class="flinks">
+          <a href="https://www.instagram.com/vicyohanamosimann">Instagram</a>
+          <a href="https://www.tiktok.com/@avicmosimann">TikTok</a>
+          <a href="#newsletter">Newsletter</a>
+        </nav>
+      </div>
+      <div>
+        <div class="fcol-title">Projetos</div>
+        <nav class="flinks">
+          <a href="#">The Signature Bride</a>
+          <a href="#">Anunciar</a><a href="#">Contato</a>
+        </nav>
+      </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <span>© 2026 The Cool Edit. Todos os direitos reservados.</span>
+      <span>por Vic Yohana Mosimann · Joinville, Brasil</span>
+    </div>
+  </div>
+</footer>
 
-  <script src="js/main.js"></script>
+<script>
+  const d = new Date();
+  const dias = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+  const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  document.getElementById('hero-date').textContent =
+    `${dias[d.getDay()]}, ${d.getDate()} de ${meses[d.getMonth()]}`;
+
+  function filter(cat, el) {
+    document.querySelectorAll('.clink').forEach(c => c.classList.remove('on'));
+    if (el && el.classList.contains('clink')) el.classList.add('on');
+    document.querySelectorAll('[data-cat]').forEach(c => {
+      const show = cat === 'todos' || c.dataset.cat === cat;
+      c.style.display = show ? '' : 'none';
+    });
+  }
+</script>
 </body>
 </html>
